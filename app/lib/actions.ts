@@ -35,7 +35,6 @@ export async function createInvoice(prevState: State, formData: FormData) {
     status: formData.get('status'),
   });
   console.log(validatedFields);
-  const { customerId, amount, status } = validatedFields.data;
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -43,6 +42,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
       message: 'Missing Fields. Failed to Create Invoice.',
     };
   }
+  const { customerId, amount, status } = validatedFields.data;
+
   // Test it out:
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
